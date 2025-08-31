@@ -243,12 +243,12 @@ const Practice: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="flex-1 px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500"
                 />
                 <button
                   onClick={handleSearch}
                   disabled={loading}
-                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full mr-5 px-2 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? '⏳' : '🔍'}
                 </button>
@@ -264,7 +264,7 @@ const Practice: React.FC = () => {
               <select
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                className="ml-3 w-full px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500"
               >
                 <option value="">All Difficulties</option>
                 <option value="Easy">Easy</option>
@@ -280,7 +280,7 @@ const Practice: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">Topics</label>
               <button
                 onClick={() => setShowTopicSelector(!showTopicSelector)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-left"
+                className=" w-full px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-left"
               >
                 {selectedTopics.length > 0 
                   ? `${selectedTopics.length} topic(s) selected`

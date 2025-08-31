@@ -39,6 +39,9 @@ const ProblemDetail: React.FC = () => {
   const [testingWithLLM, setTestingWithLLM] = useState(false);
   const [combinedResults, setCombinedResults] = useState<any>(null);
   const [rawOutput, setRawOutput] = useState<string>('');
+  const [message, setMessage] = useState<string | null>(null);
+  const [messageType, setMessageType] = useState<'success' | 'error' | 'info' | null>(null);
+
 
   // Timer state
   const [timerActive, setTimerActive] = useState(false);
@@ -140,9 +143,11 @@ const ProblemDetail: React.FC = () => {
 
   const handleSubmit = async () => {
     if (!code.trim()) {
-      alert('Please write some code before submitting');
-      return;
-    }
+  setMessage('Please write some code before submitting');
+  setMessageType('info');
+  return;
+}
+
 
     try {
       setSubmitting(true);
@@ -161,11 +166,15 @@ const ProblemDetail: React.FC = () => {
       }
       
       // Show success message
-      alert(`Solution submitted successfully! Status: ${response.data.status}. Passed: ${response.data.results?.passed || 0}/${response.data.results?.total || 0} test cases.`);
+     setMessage(`Solution submitted successfully! Status: ${response.data.status}. Passed: ${response.data.results?.passed || 0}/${response.data.results?.total || 0} test cases.`);
+    setMessageType('success');
+
       
     } catch (err: any) {
       console.error('Submission error:', err);
-      alert(err.response?.data?.message || 'Failed to submit solution');
+      setMessage(err.response?.data?.message || 'Failed to submit solution');
+      setMessageType('error');
+
     } finally {
       setSubmitting(false);
     }
@@ -175,9 +184,11 @@ const ProblemDetail: React.FC = () => {
 
   const handleRunAndTestWithLLM = async () => {
     if (!code.trim()) {
-      alert('Please write some code before running');
-      return;
-    }
+    setMessage('Please write some code before submitting');
+    setMessageType('info');
+    return;
+}
+
 
     try {
       setTestingWithLLM(true);
@@ -394,6 +405,19 @@ const ProblemDetail: React.FC = () => {
                 height="400px"
               />
             </div>
+            {message && (
+            <div
+              className={`mb-4 p-3 rounded-lg font-medium ${
+                messageType === 'success'
+                  ? 'bg-green-100 text-green-800 border border-green-200'
+                  : messageType === 'error'
+                  ? 'bg-red-100 text-red-800 border border-red-200'
+                  : 'bg-blue-100 text-blue-800 border border-blue-200'
+              }`}
+            >
+              {message}
+            </div>
+          )}
 
             <div className="flex gap-3">
               <button
